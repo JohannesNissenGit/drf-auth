@@ -105,7 +105,7 @@ delete entry:
 ```
 python manage.py createsuperuser
 ```
-(dev: johannes S22//)
+(dev: johannes asd)
 
 access local admin page:
     ```
