@@ -14,3 +14,12 @@ class IsStaffOrReadOnly(BasePermission):
 class IsNotNamedBob(BasePermission):
     def has_permission(self, request, view):
         return request.user.username != 'bob'
+
+class IsAdminForDeleteOrPatchAndReadOnly(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+        elif request.method == "DELETE": ## variant example for multiple methods: request.method in ['DELETE', 'PATCH']:
+            return bool(request.user and request.user.is_superuser)
+        else:
+            return bool(request.user and request.user.is_staff)
