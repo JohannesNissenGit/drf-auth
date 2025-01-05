@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from market_app.models import Manufacturer, Product, ManufacturerUser
-from .permissions import IsStaffOrReadOnly, IsAdminForDeleteOrPatchAndReadOnly  # ,IsOwnerOrAdmin
+from .permissions import IsStaffOrReadOnly, IsAdminForDeleteOrPatchAndReadOnly, IsOwnerOrAdmin
 from .serializers import ManufacturerSerializer, ProductSerializer, ManufacturerUserSerializer
 
 
@@ -36,7 +36,7 @@ class ManufacturerUserList(generics.ListCreateAPIView):
 class ManufacturerUserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ManufacturerUser.objects.all()
     serializer_class = ManufacturerUserSerializer
-    # permission_classes = [IsOwnerOrAdmin]
+    permission_classes = [IsOwnerOrAdmin]
 
 
 class ManufacturerProductListCreate(generics.ListCreateAPIView):
